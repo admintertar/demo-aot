@@ -1,0 +1,51 @@
+server:
+  # ???????????
+  shutdown: graceful
+  port: 33099
+
+# springdoc-openapi项目配置
+springdoc:
+  enable-native-support: true
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.example.demo
+
+spring:
+  application:
+    name: x-booking-application
+  profiles:
+    active: ${ACTIVE:local}
+  cloud:
+    nacos:
+      discovery:
+        register-enabled: ${SPRING_CLOUD_NACOS_DISCOVERY_REGISTER_ENABLED:true}
+        server-addr: ${NACOS_SERVER_ADDR:192.168.1.29:31343}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+        namespace: ${NACOS_NAMESPACE:eeb2fb76-8140-4903-a052-c1c0e7940963}
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        enabled: false
+
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+  jackson:
+    # ???null?
+    default-property-inclusion: non_null
+
+
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
