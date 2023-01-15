@@ -30,6 +30,7 @@ spring:
         username: ${NACOS_USERNAME:nacos}
         password: ${NACOS_PASSWORD:nacos}
         namespace: ${NACOS_NAMESPACE:eeb2fb76-8140-4903-a052-c1c0e7940963}
+        enabled: false
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         username: ${spring.cloud.nacos.discovery.username}
